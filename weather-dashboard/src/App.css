@@ -1,0 +1,221 @@
+/* App.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  /* Light gray background */
+}
+
+.center-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* Full viewport height */
+  text-align: center;
+}
+
+.input-container {
+  display: flex;
+  margin-top: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  /* Rounded corners for the left side */
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+  /* Blue border on focus */
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  /* Blue button */
+  border: none;
+  border-radius: 0 5px 5px 0;
+  /* Rounded corners for the right side */
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+  /* Darker blue on hover */
+}
+
+.card {
+  margin-top: 20px;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.card img {
+  width: 100px;
+  height: 100px;
+}
+
+.card h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.card p {
+  margin: 5px 0;
+  font-size: 18px;
+}
+
+/* Toggle Switch Styling */
+.toggle-container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked+.slider {
+  background-color: #007bff;
+  /* Blue when toggled */
+}
+
+input:checked+.slider:before {
+  transform: translateX(26px);
+}
+
+.weather-card {
+  width: 600px;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.location {
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.left-section {
+  text-align: left;
+}
+
+.left-section .day {
+  font-size: 32px;
+  margin: 0;
+}
+
+.left-section .date {
+  font-size: 16px;
+  margin: 5px 0;
+  color: #666;
+}
+
+.left-section .temp {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 30px 0 0 0;
+}
+
+.left-section .high-low {
+  font-size: 14px;
+  color: #666;
+}
+
+.right-section {
+  text-align: center;
+}
+
+.right-section img {
+  width: 80px;
+  height: 80px;
+  background-color: lightgrey;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  padding: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.right-section .condition {
+  font-size: 16px;
+  text-transform: capitalize;
+  margin-top: 10px;
+  color: #666;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-container p {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #666;
+}
