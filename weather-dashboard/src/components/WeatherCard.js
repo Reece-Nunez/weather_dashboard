@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { FaMapMarkerAlt } from "react-icons/fa"; // Import location icon from react-icons
+import { FaMapMarkerAlt } from "react-icons/fa"; // Import location icon
+import ReactAnimatedWeather from "react-animated-weather"; // Import animated weather icons
 
 const WeatherCard = ({ weather }) => {
   // State for toggling between Fahrenheit and Celsius
@@ -7,8 +8,8 @@ const WeatherCard = ({ weather }) => {
 
   if (!weather) return null;
 
-  const { name, main, weather: weatherData, sys, dt } = weather; // Include `sys` for country
-  const iconUrl = `https://openweathermap.org/img/wn/${weatherData[0].icon}@2x.png`;
+  const { name, main, weather: weatherData, sys, dt } = weather;
+  const weatherCondition = weatherData[0].main; // e.g., "Clouds", "Clear", etc.
 
   // Function to convert Fahrenheit to Celsius
   const convertToCelsius = (tempF) => ((tempF - 32) * 5) / 9;
@@ -40,11 +41,45 @@ const WeatherCard = ({ weather }) => {
     year: "numeric",
   });
 
+  // Map OpenWeatherMap conditions to `react-animated-weather` icons
+  const iconMapping = {
+    Clear: "CLEAR_DAY",
+    Clouds: "CLOUDY",
+    Rain: "RAIN",
+    Snow: "SNOW",
+    Drizzle: "SLEET",
+    Thunderstorm: "WIND",
+    Mist: "FOG",
+    Fog: "FOG",
+    Smoke: "FOG",
+    Haze: "FOG",
+    Dust: "FOG",
+    Sand: "FOG",
+    Ash: "FOG",
+    Squall: "WIND",
+    Tornado: "WIND",
+  };
+
+  // Map weather conditions to colors
+  const colorMapping = {
+    Clear: "#f39c12", // Orange for sunny
+    Clouds: "#d3d3d3", // Light gray for cloudy
+    Rain: "#3498db", // Blue for raining
+    Drizzle: "#3498db", // Blue for drizzle
+    Thunderstorm: "#3498db", // Blue for thunderstorm
+    Fog: "#95a5a6", // Gray for foggy
+    Mist: "#95a5a6", // Gray for mist
+    Snow: "#ffffff", // White for snow
+    Default: "#999999", // Default color
+  };
+
+  const iconColor = colorMapping[weatherCondition] || colorMapping.Default;
+
   return (
     <div className="card weather-card">
       <div className="card-header">
         <div className="location">
-          <FaMapMarkerAlt /> {name}, {sys.country} {/* Add country */}
+          <FaMapMarkerAlt /> {name}, {sys.country}
         </div>
         <div className="toggle-container">
           <label className="toggle-switch">
@@ -68,7 +103,12 @@ const WeatherCard = ({ weather }) => {
           </p>
         </div>
         <div className="right-section">
-          <img src={iconUrl} alt={weatherData[0].description} />
+          <ReactAnimatedWeather
+            icon={iconMapping[weatherCondition] || "PARTLY_CLOUDY_DAY"}
+            color={iconColor} // Apply the dynamically mapped color
+            size={80} // Size of the icon
+            animate={true} // Enable animation
+          />
           <p className="condition">{weatherData[0].description}</p>
         </div>
       </div>

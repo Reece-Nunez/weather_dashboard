@@ -1,31 +1,55 @@
-import React, { useState } from "react";
+import React from "react";
+import usePlacesAutocomplete from "use-places-autocomplete";
+import useOnclickOutside from "react-cool-onclickoutside";
 
 const SearchBar = ({ onSearch }) => {
-  const [query, setQuery] = useState("");
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      types: ["(cities)"], // Restrict to cities
+    },
+    debounce: 300, // Wait 300ms before calling the API
+  });
 
-  const handleSearch = () => {
-    if (query.trim()) {
-      onSearch(query);
-      setQuery("");
-    }
+  const ref = useOnclickOutside(() => {
+    clearSuggestions();
+  });
+
+  const handleSelect = ({ description }) => {
+    setValue(description, false);
+    clearSuggestions();
+    onSearch(description); // Trigger search for the selected city
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
+  const renderSuggestions = () =>
+    data.map((suggestion) => {
+      const {
+        structured_formatting: { main_text, secondary_text },
+      } = suggestion;
+
+      return (
+        <li key={suggestion.place_id} onClick={() => handleSelect(suggestion)}>
+          <strong>{main_text}</strong> <small>{secondary_text}</small>
+        </li>
+      );
+    });
 
   return (
-    <div className="input-container">
+    <div ref={ref} className="autocomplete-container">
       <input
         type="text"
         placeholder="Enter city name"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyPress={handleKeyPress}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        disabled={!ready}
+        className="form-control"
       />
-      <button onClick={handleSearch}>Search</button>
+      {status === "OK" && <ul className="autocomplete-dropdown">{renderSuggestions()}</ul>}
     </div>
   );
 };
