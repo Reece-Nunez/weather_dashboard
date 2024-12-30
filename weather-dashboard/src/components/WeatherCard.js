@@ -6,10 +6,14 @@ const WeatherCard = ({ weather }) => {
   // State for toggling between Fahrenheit and Celsius
   const [isFahrenheit, setIsFahrenheit] = useState(true);
 
-  if (!weather) return null;
+  // Safeguard: Return null if `weather` is not properly passed
+  if (!weather || !weather.weather || !weather.weather[0]) {
+    return null;
+  }
 
   const { name, main, weather: weatherData, sys, dt } = weather;
-  const weatherCondition = weatherData[0].main; // e.g., "Clouds", "Clear", etc.
+  console.log(weather);
+  const weatherCondition = weatherData[0]?.main || "Unknown"; // Safeguard against undefined
 
   // Function to convert Fahrenheit to Celsius
   const convertToCelsius = (tempF) => ((tempF - 32) * 5) / 9;
@@ -77,6 +81,7 @@ const WeatherCard = ({ weather }) => {
 
   return (
     <div className="card weather-card">
+      <h2>Today's Weather</h2>
       <div className="card-header">
         <div className="location">
           <FaMapMarkerAlt /> {name}, {sys.country}
@@ -109,7 +114,7 @@ const WeatherCard = ({ weather }) => {
             size={80} // Size of the icon
             animate={true} // Enable animation
           />
-          <p className="condition">{weatherData[0].description}</p>
+          <p className="condition">{weatherData[0]?.description || "Unknown"}</p>
         </div>
       </div>
     </div>
