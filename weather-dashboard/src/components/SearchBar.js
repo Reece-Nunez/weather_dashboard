@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import usePlacesAutocomplete from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, onError }) => {
   const [selectedIndex, setSelectedIndex] = useState(-1); // Track selected index in dropdown
   const {
     ready,
@@ -41,11 +41,14 @@ const SearchBar = ({ onSearch }) => {
       e.preventDefault();
       if (selectedIndex >= 0 && data[selectedIndex]) {
         handleSelect(data[selectedIndex].description);
-      } else if (value) {
+      } else if (value.trim()) {
         onSearch(value); // Trigger search with input value if no dropdown is selected
+      } else {
+        onError("Please enter a valid city name.")
       }
     }
   };
+
 
   const renderSuggestions = () =>
     data.map((suggestion, index) => {
@@ -65,10 +68,14 @@ const SearchBar = ({ onSearch }) => {
     });
 
   const handleButtonClick = () => {
-    if (selectedIndex >= 0 && data[selectedIndex]) {
-      handleSelect(data[selectedIndex].description);
-    } else if (value) {
-      onSearch(value); // Trigger search with input value
+    if (value.trim()) {
+      if (selectedIndex >= 0 && data[selectedIndex]) {
+        handleSelect(data[selectedIndex].description);
+      } else {
+        onSearch(value); // Trigger search with input value
+      }
+    } else {
+      onError("Please enter a city name.");
     }
   };
 
