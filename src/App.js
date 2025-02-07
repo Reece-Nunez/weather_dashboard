@@ -15,66 +15,40 @@ const App = () => {
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const API_KEY = "80131d16a99466e131fb3bfdb89dc4fc";
 
   // Fetch current location weather and forecast
   const fetchCurrentLocationWeather = () => {
     navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        const { latitude, longitude } = position.coords;
-        try {
-          const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${API_KEY}`;
-          const forecastURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=imperial&exclude=minutely,hourly,alerts&appid=${API_KEY}`;
-
-          const weatherResponse = await axios.get(weatherURL);
-          const forecastResponse = await axios.get(forecastURL);
-
-          setCurrentWeather(weatherResponse.data);
-          setCurrentForecast(forecastResponse.data.daily);
-        } catch (error) {
-          console.error("Error fetching current location weather:", error);
+        async (position) => {
+            const { latitude, longitude } = position.coords;
+            try {
+                const response = await axios.post('https://0o3q0ft1xi.execute-api.us-east-1.amazonaws.com/', {
+                    latitude,
+                    longitude,
+                });
+                setCurrentWeather(response.data.currentWeather);
+                setCurrentForecast(response.data.forecast);
+            } catch (error) {
+                console.error("Error fetching current location weather:", error);
+            }
+        },
+        (error) => {
+            console.error("Geolocation error:", error);
         }
-      },
-      (error) => {
-        console.error("Geolocation error:", error);
-      }
     );
-  };
+};
+
 
   // Fetch weather and forecast for a searched city
   const fetchSearchedCityWeather = async (city) => {
-
-    if (!city.trim()) {
-      setErrorMessage("Please enter a city name.");
-      setShowModal(true);
-      return;
-    }
-
     try {
-      const geocodeURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
-      const geocodeResponse = await axios.get(geocodeURL);
-
-      if (geocodeResponse.data.length === 0) {
-        setErrorMessage("City not found.");
-        setShowModal(true);
-        return;
-      }
-
-      const { lat, lon } = geocodeResponse.data[0];
-      const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${API_KEY}`;
-      const forecastURL = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=minutely,hourly,alerts&appid=${API_KEY}`;
-
-      const weatherResponse = await axios.get(weatherURL);
-      const forecastResponse = await axios.get(forecastURL);
-
-      setSearchedWeather(weatherResponse.data);
-      setSearchedForecast(forecastResponse.data.daily);
+        const response = await axios.post('https://<your-api-endpoint>/weather', { city });
+        setSearchedWeather(response.data);
     } catch (error) {
-      setErrorMessage("An error occurred while fetching weather data.");
-      setShowModal(true);
-      console.error("Error fetching searched city weather:", error);
+        console.error("Error fetching weather data:", error);
     }
-  };
+};
+
 
   useEffect(() => {
     fetchCurrentLocationWeather(); // Fetch current location weather on load
