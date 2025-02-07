@@ -42,7 +42,7 @@ const App = () => {
   // Fetch weather and forecast for a searched city
   const fetchSearchedCityWeather = async (city) => {
     try {
-        const response = await axios.post('https://<your-api-endpoint>/weather', { city });
+        const response = await axios.post('https://0o3q0ft1xi.execute-api.us-east-1.amazonaws.com/', { city });
         setSearchedWeather(response.data);
     } catch (error) {
         console.error("Error fetching weather data:", error);
