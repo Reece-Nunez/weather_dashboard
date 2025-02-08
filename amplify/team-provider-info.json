@@ -1,0 +1,23 @@
+{
+  "master": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-weatherdashboard-master-5051b-authRole",
+      "UnauthRoleArn": "arn:aws:iam::730335638958:role/amplify-weatherdashboard-master-5051b-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::730335638958:role/amplify-weatherdashboard-master-5051b-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-weatherdashboard-master-5051b-deployment",
+      "UnauthRoleName": "amplify-weatherdashboard-master-5051b-unauthRole",
+      "StackName": "amplify-weatherdashboard-master-5051b",
+      "StackId": "arn:aws:cloudformation:us-east-1:730335638958:stack/amplify-weatherdashboard-master-5051b/dc03e150-e59e-11ef-9947-12bde3bf11e3",
+      "AmplifyAppId": "d2akyugcmz7ly9"
+    },
+    "categories": {
+      "function": {
+        "weatherAPIHandler": {
+          "deploymentBucketName": "amplify-weatherdashboard-master-5051b-deployment",
+          "s3Key": "amplify-builds/weatherAPIHandler-474d624a472f30794c59-build.zip"
+        }
+      }
+    }
+  }
+}

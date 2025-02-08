@@ -1,0 +1,8 @@
+{
+  "httpMethod": "POST",
+  "path": "/weather",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{\"city\":\"Ponca City\"}"
+}
