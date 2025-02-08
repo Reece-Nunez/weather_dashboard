@@ -1,8 +1,11 @@
 {
   "httpMethod": "POST",
-  "path": "/weather",
+  "path": "/item",
+  "queryStringParameters": {
+    "limit": "10"
+  },
   "headers": {
     "Content-Type": "application/json"
   },
-  "body": "{\"city\":\"Ponca City\"}"
+  "body": "{\"msg\":\"Hello from the event.json body\"}"
 }

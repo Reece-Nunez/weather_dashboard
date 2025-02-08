@@ -1,22 +1,25 @@
 {
-  "master": {
+  "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-weatherdashboard-master-5051b-authRole",
-      "UnauthRoleArn": "arn:aws:iam::730335638958:role/amplify-weatherdashboard-master-5051b-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::730335638958:role/amplify-weatherdashboard-master-5051b-authRole",
+      "AuthRoleName": "amplify-weatherdashboard-dev-e09ee-authRole",
+      "UnauthRoleArn": "arn:aws:iam::730335638958:role/amplify-weatherdashboard-dev-e09ee-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::730335638958:role/amplify-weatherdashboard-dev-e09ee-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-weatherdashboard-master-5051b-deployment",
-      "UnauthRoleName": "amplify-weatherdashboard-master-5051b-unauthRole",
-      "StackName": "amplify-weatherdashboard-master-5051b",
-      "StackId": "arn:aws:cloudformation:us-east-1:730335638958:stack/amplify-weatherdashboard-master-5051b/dc03e150-e59e-11ef-9947-12bde3bf11e3",
-      "AmplifyAppId": "d2akyugcmz7ly9"
+      "DeploymentBucketName": "amplify-weatherdashboard-dev-e09ee-deployment",
+      "UnauthRoleName": "amplify-weatherdashboard-dev-e09ee-unauthRole",
+      "StackName": "amplify-weatherdashboard-dev-e09ee",
+      "StackId": "arn:aws:cloudformation:us-east-1:730335638958:stack/amplify-weatherdashboard-dev-e09ee/0da2f440-e675-11ef-9fe6-0e73da89f1cd",
+      "AmplifyAppId": "d7dcu004jw78x"
     },
     "categories": {
       "function": {
         "weatherAPIHandler": {
-          "deploymentBucketName": "amplify-weatherdashboard-master-5051b-deployment",
-          "s3Key": "amplify-builds/weatherAPIHandler-474d624a472f30794c59-build.zip"
+          "deploymentBucketName": "amplify-weatherdashboard-dev-e09ee-deployment",
+          "s3Key": "amplify-builds/weatherAPIHandler-4e664d4c4f3851532f78-build.zip"
         }
+      },
+      "api": {
+        "api5f88e629": {}
       }
     }
   }
