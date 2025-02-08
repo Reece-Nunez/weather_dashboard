@@ -51,7 +51,7 @@ const App = () => {
 
 
   useEffect(() => {
-    fetchCurrentLocationWeather(); // Fetch current location weather on load
+    fetchCurrentLocationWeather();
   }, []);
 
   return (
