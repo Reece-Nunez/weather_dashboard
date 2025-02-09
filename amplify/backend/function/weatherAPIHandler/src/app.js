@@ -1,10 +1,14 @@
 const express = require('express');
 const axios = require('axios');
+require('dotenv').config({ path: './.env' });
+
 
 const app = express();
 app.use(express.json()); // Middleware to parse JSON request bodies
 
 const API_KEY = process.env.WEATHER_API_KEY;
+console.log("Weather API Key:", process.env.WEATHER_API_KEY);
+
 
 app.post('/weather', async (req, res) => {
     const { city, latitude, longitude } = req.body;

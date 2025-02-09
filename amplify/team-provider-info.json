@@ -15,7 +15,7 @@
       "function": {
         "weatherAPIHandler": {
           "deploymentBucketName": "amplify-weatherdashboard-dev-e09ee-deployment",
-          "s3Key": "amplify-builds/weatherAPIHandler-4e664d4c4f3851532f78-build.zip"
+          "s3Key": "amplify-builds/weatherAPIHandler-39782f424b4d346c306b-build.zip"
         }
       },
       "api": {
